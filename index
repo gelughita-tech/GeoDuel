@@ -1,0 +1,22 @@
+GeoDuel/
+├── index.html
+├── style.css
+├── manifest.json
+├── service-worker.js
+├── assets/
+│   ├── icon-192.png
+│   ├── icon-512.png
+│   └── audio/
+│       ├── correct.mp3
+│       ├── wrong.mp3
+│       ├── achievement.mp3
+│       └── click.mp3
+├── data/
+│   ├── intrebari.json
+│   └── europe.geojson
+├── js/
+│   ├── main.js
+│   ├── profile.js
+│   ├── game.js
+│   ├── map.js
+│   └── ui.js
