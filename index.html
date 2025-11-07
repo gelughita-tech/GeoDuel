@@ -6,60 +6,71 @@
   <title>GeoDuel</title>
   <link rel="manifest" href="manifest.json" />
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  <meta name="theme-color" content="#007bff" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>
-  <!-- 👤 Selectare profil (opțional) -->
-  <section id="profile-selection-screen">
-    <h2 data-i18n="select_profile">👤 Selectează un profil</h2>
-    <ul id="saved-profiles-list" class="profile-list"></ul>
-    <input type="text" id="new-profile-name" placeholder="Nume nou profil" />
-    <button id="create-profile-btn" class="btn btn--primary">Creează profil nou</button>
-    <input type="file" id="import-profile-file" accept=".json" />
-    <button id="import-profile-btn" class="btn btn--primary">Importă profil</button>
-    <hr />
-    <button id="start-demo-btn" class="btn btn--secondary">🔍 Începe fără profil (Demo)</button>
-  </section>
-
-  <!-- 🎮 Selector moduri -->
-  <section id="mode-selector" class="hidden">
-    <h2 data-i18n="choose_mode">Alege modul de joc:</h2>
-    <select id="profile-theme">
-      <option value="classic">Clasic</option>
-      <option value="dark">Întunecat</option>
-      <option value="sunny">Solar</option>
-    </select>
-    <button id="start-game-btn" class="btn btn--primary">🧠 Standard</button>
-    <button id="explore-mode-btn" class="btn btn--secondary">🗺️ Explorare</button>
-    <button id="tour-mode-btn" class="btn btn--secondary">🎨 Turistic</button>
-    <button id="encyclopedia-mode-btn" class="btn btn--secondary">📚 Enciclopedie</button>
-    <button id="quiz-mode-btn" class="btn btn--primary">⚡ Quiz Rapid</button>
-    <button id="multiplayer-mode-btn" class="btn btn--primary">👥 Multiplayer</button>
-  </section>
-
-  <!-- 🧠 Ecran joc -->
-  <section id="gameScreen" class="hidden">
-    <div id="hud">
-      <span id="locationDisplay">🌍 Demo</span>
-      <span id="scoreDisplay">⭐ 0 P</span>
+<body class="theme-classic">
+  <header>
+    <h1>🌍 GeoDuel</h1>
+    <div class="hud">
+      <div id="locationDisplay">📍 Locație: ...</div>
+      <div id="scoreDisplay">🏆 Scor: ...</div>
+      <div id="missionDisplay" class="hud__mission">🎯 Misiune: ...</div>
     </div>
-    <div id="mapContainer"></div>
-
-    <div id="questionModal" class="modal-hidden">
-      <div id="questionOptions"></div>
-      <div id="reviewArea" class="review-area-hidden">
-        <img id="reviewImage" alt="Imagine explicativă" />
-        <p id="reviewCaption"></p>
-        <button id="continue-tour-btn" class="btn btn--secondary">Continuă explorarea</button>
-      </div>
+    <div class="controls">
+      <button onclick="showStats()">📊 Vezi statistici</button>
+      <button onclick="showAchievements()">🏅 Realizări</button>
+      <label for="themeSelector">🎨 Tema:</label>
+      <select id="themeSelector">
+        <option value="classic">Clasic</option>
+        <option value="dark">Întunecat</option>
+        <option value="tropical">Tropical</option>
+      </select>
     </div>
+  </header>
 
-    <aside id="achievement-display"></aside>
-  </section>
+  <main>
+    <div id="gameContainer">
+      <!-- Map and game UI will be injected here -->
+    </div>
+  </main>
 
-  <!-- 📦 Scripturi -->
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script type="module" src="js/main.js"></script>
+  <!-- Stats Modal -->
+  <div id="statsModal" class="modal hidden">
+    <div class="modal__content">
+      <h2>📊 Statistici</h2>
+      <canvas id="statsChart" width="300" height="200"></canvas>
+      <button onclick="closeStats()">Închide</button>
+    </div>
+  </div>
+
+  <!-- Achievements Modal -->
+  <div id="achievementsModal" class="modal hidden">
+    <div class="modal__content">
+      <h2>🏅 Realizări</h2>
+      <div id="achievementsList" class="achievements-list"></div>
+      <button onclick="closeAchievements()">Închide</button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script type="module">
+    import { loadMissions, checkMissionProgress } from './js/missions.js';
+    import { loadAchievements, checkAchievements } from './js/achievements.js';
+    import { showAchievements, closeAchievements } from './js/achievementsUI.js';
+    import { showStats, closeStats } from './js/stats.js';
+    import { initThemeSelector } from './js/themeSelector.js';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadMissions();
+      loadAchievements();
+      initThemeSelector();
+    });
+
+    // Example hook after each answer
+    window.afterAnswer = function () {
+      checkMissionProgress();
+      checkAchievements();
+    };
+  </script>
 </body>
 </html>
