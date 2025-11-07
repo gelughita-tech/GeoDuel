@@ -1,0 +1,12 @@
+[
+  {
+    "id": "first-win",
+    "title": "Prima victorie!",
+    "condition": "score >= 1"
+  },
+  {
+    "id": "europe-master",
+    "title": "Stăpânul Europei",
+    "condition": "conquered.length >= 20 && region === 'Europe'"
+  }
+]
