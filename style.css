@@ -1,0 +1,63 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+.hidden {
+  display: none;
+}
+.modal-hidden {
+  display: none;
+}
+.review-area-hidden {
+  display: none;
+}
+#hud {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: rgba(0,0,0,0.05);
+}
+#mapContainer {
+  height: 60vh;
+}
+#questionModal {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  animation: fadeIn 0.3s ease-out;
+}
+.btn {
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+}
+.btn--primary {
+  background-color: #007bff;
+  color: white;
+}
+.btn--secondary {
+  background-color: #6c757d;
+  color: white;
+}
+.btn--danger {
+  background-color: #dc3545;
+  color: white;
+}
+.profile-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.theme-classic { background-color: white; color: black; }
+.theme-dark { background-color: #222; color: white; }
+.theme-sunny { background-color: #fffbe6; color: #333; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
