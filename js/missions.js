@@ -9,34 +9,38 @@ export async function loadMissions() {
 export function checkMissionProgress() {
   const mission = window.gameState.mission;
   const player = window.gameState.players?.[window.gameState.currentPlayerIndex] || window.gameState.profile;
+  const stats = player.stats || {};
+  const conquered = player.conquered || [];
+
+  if (!stats.missionsCompleted) stats.missionsCompleted = [];
+  if (stats.missionsCompleted.includes(mission.id)) return;
+
+  let completed = false;
 
   if (mission.targets) {
-    const conquered = player.conquered || [];
     const matched = conquered.filter(c => mission.targets.includes(c));
-    if (matched.length >= mission.targets.length) {
-      unlockMission(mission);
-    }
+    completed = matched.length >= mission.targets.length;
   }
 
   if (mission.condition) {
-    const correct = player.stats?.correctAnswers || 0;
-    if (eval(mission.condition)) {
-      unlockMission(mission);
+    try {
+      completed = completed || eval(mission.condition);
+    } catch (e) {
+      console.warn(`Eroare la evaluarea condiției pentru misiune: ${mission.id}`, e);
     }
   }
-}
 
-function unlockMission(mission) {
-  if (!player.stats.missionsCompleted) player.stats.missionsCompleted = [];
-  if (!player.stats.missionsCompleted.includes(mission.id)) {
-    player.stats.missionsCompleted.push(mission.id);
+  if (completed) {
+    stats.missionsCompleted.push(mission.id);
     playSound('achievement');
-    alert(`🎉 Misiune completată: ${mission.title}`);
+    alert(`🎯 Misiune completată: ${mission.title}`);
   }
 }
 
 function updateMissionHUD() {
   const mission = window.gameState.mission;
   const el = document.getElementById('missionDisplay');
-  if (mission) el.textContent = `🎯 Misiune: ${mission.title}`;
+  if (mission && el) {
+    el.textContent = `🎯 Misiune: ${mission.title}`;
+  }
 }
