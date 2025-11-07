@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GeoDuel</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <meta name="theme-color" content="#007bff" />
+</head>
+<body>
+  <!-- 👤 Selectare profil (opțional) -->
+  <section id="profile-selection-screen">
+    <h2 data-i18n="select_profile">👤 Selectează un profil</h2>
+    <ul id="saved-profiles-list" class="profile-list"></ul>
+    <input type="text" id="new-profile-name" placeholder="Nume nou profil" />
+    <button id="create-profile-btn" class="btn btn--primary">Creează profil nou</button>
+    <input type="file" id="import-profile-file" accept=".json" />
+    <button id="import-profile-btn" class="btn btn--primary">Importă profil</button>
+    <hr />
+    <button id="start-demo-btn" class="btn btn--secondary">🔍 Începe fără profil (Demo)</button>
+  </section>
+
+  <!-- 🎮 Selector moduri -->
+  <section id="mode-selector" class="hidden">
+    <h2 data-i18n="choose_mode">Alege modul de joc:</h2>
+    <select id="profile-theme">
+      <option value="classic">Clasic</option>
+      <option value="dark">Întunecat</option>
+      <option value="sunny">Solar</option>
+    </select>
+    <button id="start-game-btn" class="btn btn--primary">🧠 Standard</button>
+    <button id="explore-mode-btn" class="btn btn--secondary">🗺️ Explorare</button>
+    <button id="tour-mode-btn" class="btn btn--secondary">🎨 Turistic</button>
+    <button id="encyclopedia-mode-btn" class="btn btn--secondary">📚 Enciclopedie</button>
+    <button id="quiz-mode-btn" class="btn btn--primary">⚡ Quiz Rapid</button>
+    <button id="multiplayer-mode-btn" class="btn btn--primary">👥 Multiplayer</button>
+  </section>
+
+  <!-- 🧠 Ecran joc -->
+  <section id="gameScreen" class="hidden">
+    <div id="hud">
+      <span id="locationDisplay">🌍 Demo</span>
+      <span id="scoreDisplay">⭐ 0 P</span>
+    </div>
+    <div id="mapContainer"></div>
+
+    <div id="questionModal" class="modal-hidden">
+      <div id="questionOptions"></div>
+      <div id="reviewArea" class="review-area-hidden">
+        <img id="reviewImage" alt="Imagine explicativă" />
+        <p id="reviewCaption"></p>
+        <button id="continue-tour-btn" class="btn btn--secondary">Continuă explorarea</button>
+      </div>
+    </div>
+
+    <aside id="achievement-display"></aside>
+  </section>
+
+  <!-- 📦 Scripturi -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
