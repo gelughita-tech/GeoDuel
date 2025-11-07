@@ -1,0 +1,20 @@
+[
+  {
+    "id": "first-answer",
+    "title": "Primul răspuns!",
+    "description": "Ai răspuns la prima întrebare.",
+    "condition": "stats.correctAnswers >= 1"
+  },
+  {
+    "id": "europe-conqueror",
+    "title": "Stăpânul Europei",
+    "description": "Ai cucerit 10 țări din Europa.",
+    "condition": "conquered.filter(c => c.region === 'Europe').length >= 10"
+  },
+  {
+    "id": "perfect-round",
+    "title": "Tur perfect",
+    "description": "Ai răspuns corect la toate întrebările dintr-un tur.",
+    "condition": "stats.correctAnswers === stats.totalAnswers"
+  }
+]
