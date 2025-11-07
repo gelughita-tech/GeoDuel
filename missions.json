@@ -1,0 +1,14 @@
+[
+  {
+    "id": "europe-east",
+    "title": "Cucerește 5 țări din Europa de Est",
+    "region": "Europe",
+    "targets": ["Romania", "Bulgaria", "Ukraine", "Moldova", "Serbia"]
+  },
+  {
+    "id": "coastal-africa",
+    "title": "Găsește 3 țări africane cu ieșire la mare",
+    "region": "Africa",
+    "targets": ["Morocco", "Kenya", "Mozambique"]
+  }
+]
