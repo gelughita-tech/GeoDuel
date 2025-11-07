@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <title>GeoDuel Test</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>🔧 Test GeoDuel Modules</h1>
+
+  <button onclick="testSwitchPlayer()">🔄 Test switchPlayer()</button>
+  <button onclick="testUpdateHUD()">🧠 Test updateHUD()</button>
+  <button onclick="testPlaySound()">🔊 Test playSound('click')</button>
+  <button onclick="testMultiplayerInit()">👥 Init Multiplayer</button>
+
+  <div id="locationDisplay">Locație</div>
+  <div id="scoreDisplay">Scor</div>
+
+  <script type="module">
+    import { switchPlayer } from './js/game.js';
+    import { updateHUD, playSound } from './js/ui.js';
+
+    window.gameState = {
+      players: [
+        { name: 'Jucător 1', score: 10, conquered: [], stats: {} },
+        { name: 'Jucător 2', score: 20, conquered: [], stats: {} }
+      ],
+      currentPlayerIndex: 0,
+      mode: 'multiplayer'
+    };
+
+    window.testSwitchPlayer = () => {
+      switchPlayer();
+      console.log('Player switched:', window.gameState.currentPlayerIndex);
+    };
+
+    window.testUpdateHUD = () => {
+      updateHUD();
+      console.log('HUD updated');
+    };
+
+    window.testPlaySound = () => {
+      playSound('click');
+      console.log('Sound played');
+    };
+
+    window.testMultiplayerInit = () => {
+      window.gameState = {
+        players: [
+          { name: 'Jucător 1', score: 0, conquered: [], stats: {} },
+          { name: 'Jucător 2', score: 0, conquered: [], stats: {} }
+        ],
+        currentPlayerIndex: 0,
+        mode: 'multiplayer'
+      };
+      updateHUD();
+      console.log('Multiplayer initialized');
+    };
+  </script>
+</body>
+</html>
